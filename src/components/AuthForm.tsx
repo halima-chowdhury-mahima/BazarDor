@@ -69,13 +69,21 @@ export default function AuthForm({
           password,
         });
 
-        if (result.error) {
-          toast.error(
-            result.error.message ??
-              "রেজিস্ট্রেশন ব্যর্থ হয়েছে"
-          );
-          return;
-        }
+       if (result.error) {
+  console.error("Signup error:", {
+    code: result.error.code,
+    status: result.error.status,
+    message: result.error.message,
+  });
+
+  toast.error(
+    result.error.message ||
+      result.error.code ||
+      "রেজিস্ট্রেশন ব্যর্থ হয়েছে"
+  );
+
+  return;
+}
 
         toast.success(
           "রেজিস্ট্রেশন সফল হয়েছে"
