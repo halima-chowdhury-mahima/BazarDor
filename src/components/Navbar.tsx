@@ -90,7 +90,7 @@ export default function Navbar({
   }
 
   return (
-    <header className="relative z-50 w-full border-b border-[#e6ebe7] bg-white">
+    <header className="relative z-50 w-full border-b border-[#e6ebe7] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
 
       {/* ================= TOP NAVBAR ================= */}
 
