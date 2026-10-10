@@ -74,7 +74,7 @@ export default async function Home() {
         height={600}
         priority
         sizes="(max-width: 768px) 90vw, 500px"
-        className="h-[230px] w-auto max-w-none object-contain sm:h-[260px] md:h-[300px]"
+        className="h-[260px] w-auto max-w-none object-contain drop-shadow-sm sm:h-[290px] md:h-[320px]"
       />
 
     </div>
