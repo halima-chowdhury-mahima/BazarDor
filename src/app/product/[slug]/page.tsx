@@ -148,9 +148,10 @@ export default async function ProductPage({
 
       <div className="overflow-hidden rounded-2xl bg-white shadow-sm">
         <div className="border-b border-gray-100 p-6">
-          <h2 className="text-xl font-bold">
-            বাজারভিত্তিক আজকের দাম
-          </h2>
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold text-[#173323]">
+  <span aria-hidden="true">🏪</span>
+  বাজারভিত্তিক আজকের দাম
+</h2>
 
           <p className="mt-2 text-sm text-gray-500">
             প্রতিটি বাজারের সর্বনিম্ন,
