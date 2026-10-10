@@ -31,9 +31,16 @@ export const auth = betterAuth({
   baseURL,
 
   trustedOrigins: [
-    "http://localhost:3000",
-    "https://bazar-dor-seven.vercel.app",
-  ],
+  "http://localhost:3000",
+  "https://bazar-dor-seven.vercel.app",
+  "https://bazar-rcjis9d17-halimachowdhurymahina-8407.vercel.app",
+  ...(process.env.VERCEL_URL
+    ? [`https://${process.env.VERCEL_URL}`]
+    : []),
+  ...(process.env.VERCEL_BRANCH_URL
+    ? [`https://${process.env.VERCEL_BRANCH_URL}`]
+    : []),
+],
 
   emailAndPassword: {
     enabled: true,
