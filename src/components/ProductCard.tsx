@@ -24,7 +24,7 @@ export default function ProductCard({
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="block min-h-[110px] rounded-xl border border-[#e1e9e2] bg-white px-4 py-3 transition-all duration-200 hover:border-green-300 hover:shadow-md"
+      className="block min-h-[112px] rounded-xl border border-[#e1e9e2] bg-white px-4 py-3 transition-all duration-300 hover:-translate-y-1 hover:border-green-300 hover:shadow-md"
     >
       {/* PRODUCT TOP */}
 
