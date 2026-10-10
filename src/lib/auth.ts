@@ -7,18 +7,14 @@ import { mongodbAdapter } from "@better-auth/mongo-adapter";
 const uri = process.env.MONGODB_URI?.trim();
 
 if (!uri) {
-  throw new Error(
-    "MONGODB_URI is missing. Set it in Vercel Environment Variables."
-  );
+  throw new Error("MONGODB_URI is missing.");
 }
 
 if (
   !uri.startsWith("mongodb+srv://") &&
   !uri.startsWith("mongodb://")
 ) {
-  throw new Error(
-    "Invalid MONGODB_URI. Connection string must start with mongodb+srv:// or mongodb://."
-  );
+  throw new Error("Invalid MongoDB connection string.");
 }
 
 const globalForMongo = globalThis as unknown as {
@@ -26,11 +22,16 @@ const globalForMongo = globalThis as unknown as {
 };
 
 const client =
-  globalForMongo.mongoClient ??
-  new MongoClient(uri);
+  globalForMongo.mongoClient ?? new MongoClient(uri);
 
 if (process.env.NODE_ENV !== "production") {
   globalForMongo.mongoClient = client;
+}
+
+const baseURL = process.env.BETTER_AUTH_URL?.trim();
+
+if (!baseURL) {
+  throw new Error("BETTER_AUTH_URL is missing.");
 }
 
 export const auth = betterAuth({
@@ -39,7 +40,12 @@ export const auth = betterAuth({
   }),
 
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL,
+
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://bazar-dor-git-main-halimachowdhurymahina-8407.vercel.app",
+  ],
 
   emailAndPassword: {
     enabled: true,
