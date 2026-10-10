@@ -10,13 +10,6 @@ if (!uri) {
   throw new Error("MONGODB_URI is missing.");
 }
 
-if (
-  !uri.startsWith("mongodb+srv://") &&
-  !uri.startsWith("mongodb://")
-) {
-  throw new Error("Invalid MongoDB connection string.");
-}
-
 const globalForMongo = globalThis as unknown as {
   mongoClient?: MongoClient;
 };
@@ -28,11 +21,18 @@ if (process.env.NODE_ENV !== "production") {
   globalForMongo.mongoClient = client;
 }
 
-const baseURL = process.env.BETTER_AUTH_URL?.trim();
+const productionURL = process.env.BETTER_AUTH_URL?.trim();
 
-if (!baseURL) {
-  throw new Error("BETTER_AUTH_URL is missing.");
-}
+const trustedOrigins = [
+  "http://localhost:3000",
+  productionURL,
+  process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : undefined,
+  process.env.VERCEL_BRANCH_URL
+    ? `https://${process.env.VERCEL_BRANCH_URL}`
+    : undefined,
+].filter((url): url is string => Boolean(url));
 
 export const auth = betterAuth({
   database: mongodbAdapter(client.db("bazardor"), {
@@ -40,12 +40,9 @@ export const auth = betterAuth({
   }),
 
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL,
+  baseURL: productionURL,
 
-  trustedOrigins: [
-    "http://localhost:3000",
-    "https://bazar-dor-git-main-halimachowdhurymahina-8407.vercel.app",
-  ],
+  trustedOrigins,
 
   emailAndPassword: {
     enabled: true,
