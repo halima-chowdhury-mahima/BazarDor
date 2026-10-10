@@ -22,6 +22,11 @@ export default function Footer() {
           নির্ভর করে পরিবর্তিত হয়।
         </p>
       </div>
+      <div className="border-t border-gray-100 py-4 text-center">
+  <p className="text-xs text-gray-500">
+    © {new Date().getFullYear()} BazarDor. All Rights Reserved.
+  </p>
+</div>
     </footer>
   );
 }
