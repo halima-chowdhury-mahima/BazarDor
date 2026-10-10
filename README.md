@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 BazarDor — বাজার দর
 
-## Getting Started
+### Daily Market Price Tracking Application
 
-First, run the development server:
+BazarDor is a modern, responsive, full-stack web application designed to help users explore and compare the daily prices of essential products in Bangladesh.
+
+Built with **Next.js, TypeScript, Tailwind CSS, DaisyUI, Better Auth, and MongoDB Atlas**, the platform provides daily market price updates, product comparisons, price trends, and secure user authentication through a clean, user-friendly interface.
+
+## ✨ Key Features
+
+1. **Daily Market Prices** — Browse updated prices of 33 essential products across 8 categories.
+2. **Live Price Ticker** — An infinite scrolling ticker displaying product names, current prices, and price changes.
+3. **Price Trend Analysis** — Explore the top 6 products with increasing prices and the top 6 with decreasing prices.
+4. **Category-Based Browsing** — Explore products by category and sort by price in ascending or descending order.
+5. **Detailed Product Information** — View individual product prices, market-wise minimum and maximum prices, and estimated average prices.
+6. **Secure Authentication** — Sign up and sign in using email and password with Better Auth and MongoDB.
+7. **Protected Routes** — Restrict product details and profile pages to authenticated users.
+8. **Profile Management** — View and update user information.
+9. **Responsive Design** — Optimized for desktop, tablet, and mobile devices.
+10. **Loading and Error Handling** — Skeleton loaders, custom 404 page, error states, and toast notifications.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Next.js 16 | Full-stack React framework |
+| React | Component-based user interfaces |
+| TypeScript | Type-safe application development |
+| Tailwind CSS | Responsive styling |
+| DaisyUI | UI components |
+| Better Auth | User authentication |
+| MongoDB Atlas | Cloud database |
+| MongoDB Adapter | Database integration with Better Auth |
+| Lucide React | Modern icons |
+| React Hot Toast | Notifications |
+| Vercel | Hosting and deployment |
+
+## 🔐 Authentication
+
+BazarDor uses Better Auth with MongoDB Atlas to securely manage accounts and sessions. Users can register, sign in, sign out, and update their profiles.
+
+Google and GitHub OAuth authentication can also be configured using provider credentials.
+
+## 📄 Main Pages
+
+| Route | Description |
+|---|---|
+| `/` | Homepage and all products |
+| `/category/[slug]` | Category products with sorting |
+| `/product/[slug]` | Protected product details |
+| `/signin` | Sign-in page |
+| `/signup` | Registration page |
+| `/profile` | User profile |
+| `/profile/update` | Edit profile information |
+
+## 🚀 Installation
+
+**Clone the repository**
+
+```bash
+git clone https://github.com/halima-chowdhury-mahima/BazarDor.git
+cd BazarDor
+```
+
+**Install dependencies**
+
+```bash
+npm install
+```
+
+**Create a `.env.local` file**
+
+```env
+MONGODB_URI="your_mongodb_connection_string"
+BETTER_AUTH_SECRET="your_secret_key"
+BETTER_AUTH_URL="http://localhost:3000"
+```
+
+**Run the application**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🌐 Links
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**GitHub Repository:** https://github.com/halima-chowdhury-mahima/BazarDor
 
-## Learn More
+**Live Website:** Coming soon
 
-To learn more about Next.js, take a look at the following resources:
+## 👩‍💻 Developed By
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Halima Chowdhury Mahima**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Full Stack Web Developer
 
-## Deploy on Vercel
+GitHub: https://github.com/halima-chowdhury-mahima
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Made with Next.js, TypeScript, Tailwind CSS, and MongoDB.
