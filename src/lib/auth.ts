@@ -4,11 +4,20 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI?.trim();
 
 if (!uri) {
   throw new Error(
-    "MONGODB_URI missing. Configure MongoDB in .env.local."
+    "MONGODB_URI is missing. Set it in Vercel Environment Variables."
+  );
+}
+
+if (
+  !uri.startsWith("mongodb+srv://") &&
+  !uri.startsWith("mongodb://")
+) {
+  throw new Error(
+    "Invalid MONGODB_URI. Connection string must start with mongodb+srv:// or mongodb://."
   );
 }
 
@@ -17,7 +26,8 @@ const globalForMongo = globalThis as unknown as {
 };
 
 const client =
-  globalForMongo.mongoClient ?? new MongoClient(uri);
+  globalForMongo.mongoClient ??
+  new MongoClient(uri);
 
 if (process.env.NODE_ENV !== "production") {
   globalForMongo.mongoClient = client;
