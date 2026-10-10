@@ -25,6 +25,7 @@ const productionURL = process.env.BETTER_AUTH_URL?.trim();
 
 const trustedOrigins = [
   "http://localhost:3000",
+  "https://bazar-dor-seven.vercel.app",
   productionURL,
   process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
