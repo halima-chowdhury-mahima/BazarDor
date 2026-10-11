@@ -1,54 +1,33 @@
 
-import "server-only";
-
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
-import { mongodbAdapter } from "@better-auth/mongo-adapter";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
-const uri = process.env.MONGODB_URI?.trim();
-const baseURL = process.env.BETTER_AUTH_URL?.trim();
-const secret = process.env.BETTER_AUTH_SECRET;
+const databaseUrl = process.env.BETTER_AUTH_DB_URL;
 
-if (!uri) {
-  throw new Error("MONGODB_URI is missing");
+if (!databaseUrl) {
+  throw new Error("BETTER_AUTH_DB_URL is missing");
 }
 
-if (!baseURL) {
-  throw new Error("BETTER_AUTH_URL is missing");
-}
+const client = new MongoClient(databaseUrl);
+const db = client.db("better-auth-db");
 
-if (!secret) {
-  throw new Error("BETTER_AUTH_SECRET is missing");
-}
-
-const globalForMongo = globalThis as typeof globalThis & {
-  mongoClient?: MongoClient;
-};
-
-const client =
-  globalForMongo.mongoClient ??
-  new MongoClient(uri, {
-    maxPoolSize: 5,
-    serverSelectionTimeoutMS: 10000,
-  });
-
-globalForMongo.mongoClient = client;
-
-const db = client.db("bazardor");
+const trustedOrigins = [
+  "https://bazar-dor-seven.vercel.app",
+  "https://bazar-o7qg5izne-halimachowdhurymahina-8407.vercel.app",
+];
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db, { client }),
+  baseURL: process.env.BETTER_AUTH_URL,
 
-  secret,
-
-  baseURL,
-
-  trustedOrigins: [
-    "http://localhost:3000",
-    "https://bazar-dor-seven.vercel.app",
-  ],
+  trustedOrigins,
 
   emailAndPassword: {
     enabled: true,
+    requireEmailVerification: false,
   },
+
+  database: mongodbAdapter(db, {
+    client,
+  }),
 });
