@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -20,11 +21,30 @@ interface NavbarProps {
   date: string;
 }
 
-export default function Navbar({
+export default function Navbar(props: NavbarProps) {
+  const pathname = usePathname();
+
+  return (
+    <NavbarContent
+      key={pathname}
+      pathname={pathname}
+      categories={props.categories}
+      date={props.date}
+    />
+  );
+}
+
+interface NavbarContentProps {
+  categories: Category[];
+  date: string;
+  pathname: string;
+}
+
+function NavbarContent({
   categories,
   date,
-}: NavbarProps) {
-  const pathname = usePathname();
+  pathname,
+}: NavbarContentProps) {
   const router = useRouter();
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,11 +81,6 @@ export default function Navbar({
     };
   }, []);
 
-  useEffect(() => {
-    setMenuOpen(false);
-    setProfileOpen(false);
-  }, [pathname]);
-
   async function handleLogout() {
     try {
       const result = await authClient.signOut();
@@ -91,13 +106,9 @@ export default function Navbar({
 
   return (
     <header className="relative z-50 w-full border-b border-[#e6ebe7] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
-
-      {/* ================= TOP NAVBAR ================= */}
-
+      {/* TOP NAVBAR */}
       <div className="mx-auto flex w-full max-w-[1050px] items-center justify-between gap-4 px-5 py-3">
-
-        {/* LEFT SIDE — LOGO */}
-
+        {/* LOGO */}
         <Link
           href="/"
           className="flex min-w-0 items-center gap-3"
@@ -117,16 +128,11 @@ export default function Navbar({
           </div>
         </Link>
 
-        {/* RIGHT SIDE — AUTH */}
-
+        {/* AUTH */}
         <div className="flex shrink-0 items-center gap-2">
-
           {isPending ? (
             <div className="skeleton h-9 w-24 rounded-lg" />
           ) : user ? (
-
-            /* LOGGED IN USER */
-
             <div
               ref={dropdownRef}
               className="relative"
@@ -138,9 +144,7 @@ export default function Navbar({
                 aria-haspopup="menu"
                 className="flex items-center gap-2 rounded-xl px-2 py-2 transition-colors hover:bg-[#f0f7f2]"
               >
-
                 {/* AVATAR */}
-
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#e3f3e8]">
                   {user.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -158,7 +162,6 @@ export default function Navbar({
                 </div>
 
                 {/* USER NAME */}
-
                 <span className="hidden max-w-[120px] truncate text-[13px] font-medium text-[#26372b] sm:block">
                   {user.name}
                 </span>
@@ -172,15 +175,12 @@ export default function Navbar({
               </button>
 
               {/* PROFILE DROPDOWN */}
-
               {profileOpen && (
                 <div
                   role="menu"
                   className="absolute right-0 top-full z-[100] mt-2 w-[255px] max-w-[calc(100vw-24px)] rounded-2xl border border-[#e8eeea] bg-white p-3 shadow-[0_8px_25px_rgba(0,0,0,0.12)]"
                 >
-
                   {/* USER INFO */}
-
                   <div className="border-b border-gray-100 px-2 pb-3">
                     <p className="truncate text-[13px] font-bold text-gray-900">
                       {user.name}
@@ -192,7 +192,6 @@ export default function Navbar({
                   </div>
 
                   {/* PROFILE LINK */}
-
                   <div className="pt-2">
                     <Link
                       href="/profile"
@@ -205,7 +204,6 @@ export default function Navbar({
                     </Link>
 
                     {/* SIGN OUT */}
-
                     <button
                       type="button"
                       role="menuitem"
@@ -219,11 +217,8 @@ export default function Navbar({
                 </div>
               )}
             </div>
-
           ) : (
-
             /* NOT LOGGED IN */
-
             <div className="flex items-center gap-2">
               <Link
                 href="/signin"
@@ -242,7 +237,6 @@ export default function Navbar({
           )}
 
           {/* MOBILE MENU BUTTON */}
-
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -259,8 +253,7 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* ================= CATEGORY NAVBAR ================= */}
-
+      {/* CATEGORY NAVBAR */}
       <nav
         aria-label="পণ্যের ক্যাটাগরি"
         className={`border-t border-[#edf0ed] ${
@@ -268,9 +261,7 @@ export default function Navbar({
         } md:block`}
       >
         <div className="mx-auto flex w-full max-w-[1050px] flex-wrap items-center justify-center gap-1.5 px-5 py-2">
-
           {/* ALL PRODUCTS */}
-
           <Link
             href="/"
             onClick={() => setMenuOpen(false)}
@@ -284,7 +275,6 @@ export default function Navbar({
           </Link>
 
           {/* CATEGORY ITEMS */}
-
           {categories.map((category) => {
             const active =
               pathname === `/category/${category.slug}`;

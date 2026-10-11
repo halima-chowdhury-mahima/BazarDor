@@ -22,13 +22,14 @@
     "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "daisyui": "^5.7.47",
-    "eslint": "^9",
+    "eslint": "^9.39.5",
     "eslint-config-next": "16.4.0",
     "tailwindcss": "^4",
     "typescript": "^5"
