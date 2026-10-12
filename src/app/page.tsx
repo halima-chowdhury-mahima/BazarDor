@@ -44,9 +44,9 @@ export default async function Home() {
         {banglaDate()}
       </span>
 
-      <h1 className="text-2xl font-extrabold leading-tight text-[#1c2920] sm:text-3xl lg:text-[34px]">
-        আজকের বাজারের দাম এক নজরে
-      </h1>
+      <h1 className="whitespace-nowrap text-lg font-extrabold leading-tight text-[#1c2920] sm:text-2xl lg:text-[34px]">
+  আজকের বাজারের দাম এক নজরে
+</h1>
 
       <p className="mx-auto mt-4 max-w-[520px] text-sm leading-7 text-gray-500 md:mx-0">
         চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম —
