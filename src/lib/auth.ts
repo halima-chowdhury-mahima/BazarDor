@@ -17,6 +17,8 @@ const trustedOrigins = [
   "https://bazar-dor-seven.vercel.app",
   "https://bazar-bwhq6aovm-halimachowdhurymahina-8407.vercel.app",
   "https://bazar-o7qg5izne-halimachowdhurymahina-8407.vercel.app",
+  "https://bazar-dor-git-main-halimachowdhurymahina-8407.vercel.app",
+  "https://bazar-gi6plr4ly-halimachowdhurymahina-8407.vercel.app"
 ];
 
 export const auth = betterAuth({
