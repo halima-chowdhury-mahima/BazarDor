@@ -30,6 +30,16 @@ export const auth = betterAuth({
     requireEmailVerification: false,
   },
 
+  account: {
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google", "github"],
+    },
+  },
+
+
+
+
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID!,
