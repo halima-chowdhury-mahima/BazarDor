@@ -88,7 +88,7 @@ Open `http://localhost:3000` in your browser.
 
 **GitHub Repository:** https://github.com/halima-chowdhury-mahima/BazarDor
 
-**Live Website:** Coming soon
+
 
 ## 👩‍💻 Developed By
 
